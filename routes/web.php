@@ -10,14 +10,25 @@ Route::get('/', function () {
         'heading' => 'Latest Listings:',
         'listings' => Listing::all()
     ]);
+    // return view('welcome');
 });
 
 // Single listing
-Route::get('/listings/{id}', function ($id) {
+Route::get('/listings/{listing}', function (Listing $listing) {
     return view('listing', [
-      'listing' => Listing::find($id)
+    'listing' => $listing
     ]);
 });
+// Route::get('/listings/{id}', function ($id) {
+//     $listing = Listing::find($id);
+//     if ($listing) {
+//         return view('listing', [
+//         'listing' => $listing
+//         ]);
+//     } else {
+//         abort('404');
+//     }
+// });
 
 
 // Route::get('/', function () {

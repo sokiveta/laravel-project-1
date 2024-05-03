@@ -1,24 +1,30 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Latest Listings</title>
-    </head>
-    <body>
+<?php
+// namespace App\Http\Controllers;
+// use Illuminate\Http\Request;
+// use App\Models\User;
 
-        <h1>{{$heading}}</h1>
+// class UserController extends Controller {
+//    public function index() {
+//       $images = \File::allFiles(public_path('images'));
+//       return View('test')->with(array('images'=>$images));
+//    }
+// }
+?>
 
-        @unless(count($listings) == 0)
+@extends('layout')
+@section('content')
+@include('partials._hero')
+@include('partials._search')
 
-        @foreach($listings as $listing)
-        <h2><a href="/listings/{{$listing['id']}}">{{$listing['title']}}</a></h2>
-        <p>{{$listing['description']}}</p>
-        @endforeach
+@unless(count($listings) == 0)
 
-        @else
-        <p>No listings found</p>
-        @endunless
+<div class="lg:grid lg:grid-cols-2 gap-4 space-y-4 md:space-y-0 mx-4">
+    @foreach($listings as $listing)
+        <x-listing-card :listing="$listing" />
+    @endforeach
+    @else
+    <p>No listings found</p>
+    @endunless
+</div>
 
-    </body>
-</html>
+@endsection
