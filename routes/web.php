@@ -1,24 +1,52 @@
 <?php
 
+use App\Http\Controllers\ListingController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Listing;
 
 // All listings
-Route::get('/', function () {
-    return view('listings', [
-        'heading' => 'Latest Listings:',
-        'listings' => Listing::all()
-    ]);
-    // return view('welcome');
-});
+Route::get('/', [ListingController::class, 'index']);
+
+// Show Create Form
+Route::get('/listings/create', [ListingController::class, 'create']);
+
+// Store listing
+Route::post('/listings', [ListingController::class, 'store']);
+
+// Show Edit Form
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);
+
+// Update Listing
+Route::put('/listings/{listing}', [ListingController::class, 'update']);
+
+// Delete Listing
+Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);
+
+
+
 
 // Single listing
-Route::get('/listings/{listing}', function (Listing $listing) {
-    return view('listing', [
-    'listing' => $listing
-    ]);
-});
+Route::get('/listings/{listing}', [ListingController::class, 'show']);
+
+
+
+// // All listings
+// Route::get('/', function () {
+//     return view('listings', [
+//         'heading' => 'Latest Listings:',
+//         'listings' => Listing::all()
+//     ]);
+//     // return view('welcome');
+// });
+
+// // Single listing
+// Route::get('/listings/{listing}', function (Listing $listing) {
+//     return view('listing', [
+//     'listing' => $listing
+//     ]);
+// });
+
 // Route::get('/listings/{id}', function ($id) {
 //     $listing = Listing::find($id);
 //     if ($listing) {
