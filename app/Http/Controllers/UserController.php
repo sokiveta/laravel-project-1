@@ -52,7 +52,7 @@ class UserController extends Controller
     // authenticate login form
     public function authenticate (Request $request) {
         $formFields = $request->validate([
-            'email'=>['required', 'email'],
+            'email'=>['required', 'email'], 
             'password'=>'required'           
         ]);
 
